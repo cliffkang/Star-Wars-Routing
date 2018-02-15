@@ -1,4 +1,5 @@
 import React from 'react';
+import CharDetails from './CharDetails';
 
 function Character(props) {
 
@@ -11,6 +12,7 @@ function Character(props) {
           <p>Height (cm): {props.character.height}</p>
           <p>Eye Color: {props.character.eye_color}</p>
           <p>Hair Color: {props.character.hair_color}</p>
+          <CharDetails homeworldUrl={props.character.homeworld} />
         </div>
         <h1>{props.character.name}</h1>
       </div>

@@ -1,9 +1,10 @@
 import React from 'react';
 import CharDetails from './CharDetails';
+import { Link } from 'react-router-dom'
 
 function Character(props) {
-
   return(
+    <Link to={`/character/${props.character.name}`} >
       <div className='char'>
         <div className='bio'>
           <p>Birth Year: {props.character.birth_year}</p>
@@ -16,7 +17,8 @@ function Character(props) {
         </div>
         <h1>{props.character.name}</h1>
       </div>
+      {/* <Route path='/character/:name' component={this} /> */}
+    </Link>
   )
 }
-
 export default Character;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 function Character(props) {
   return(
-    <Link to={`/character/${props.character.name}`} >
+    <Link to={`/character/${props.character.id}`} >
       <div className='char'>
         <div className='bio'>
           <p>Birth Year: {props.character.birth_year}</p>

@@ -1,52 +1,49 @@
-import React from 'react';
-import CharDetails from './CharDetails';
-import axios from 'axios';
+import React from "react";
+import CharDetails from "./CharDetails";
+import axios from "axios";
 
 class CharHighlight extends React.Component {
   state = {
-    starwarsChars: []
+    starwarsChar: null
   };
 
   componentDidMount() {
-    console.log('componentDidMount ran');
-    let name = this.props.match.params.name;
-    console.log('name is', name);
+    console.log("componentDidMount ran");
     axios
-      .get(`https://swapi.co/api/people`)
+      .get(`https://swapi.co/api/people/${this.props.match.params.id}`)
       .then(data => {
-        this.setState({ starwarsChars: data.results });
+        this.setState({ starwarsChar: data.data });
       })
       .catch(err => {
         throw new Error(err);
       });
   }
+  // // regex expression to get the number out of the URL
+  // /https:\/\/swapi.co\/api\/people\/(*.?)\//
 
   render() {
-    return(
+    if (!this.state.starwarsChar) {
+      return <div>Loading character information...</div>;
+    } else {
+      return (
         <div>
-          {console.log('state inside render',this.state)}
-          <div className='char'>
-            <div className='bio'>
-              <p>Birth Year: {this.findCharacter().birth_year}</p>
-              <p>Gender: {this.findCharacter().gender}</p>
-              <p>Weight (kg): {this.findCharacter().mass}</p>
-              <p>Height (cm): {this.findCharacter().height}</p>
-              <p>Eye Color: {this.findCharacter().eye_color}</p>
-              <p>Hair Color: {this.findCharacter().hair_color}</p>
-              {/* <CharDetails homeworldUrl={this.findCharacter().homeworld} /> */}
+          {console.log("state inside render", this.state)}
+          <div className="char">
+            <div className="bio">
+              <p>Birth Year: {this.state.starwarsChar.birth_year}</p>
+              <p>Gender: {this.state.starwarsChar.gender}</p>
+              <p>Weight (kg): {this.state.starwarsChar.mass}</p>
+              <p>Height (cm): {this.state.starwarsChar.height}</p>
+              <p>Eye Color: {this.state.starwarsChar.eye_color}</p>
+              <p>Hair Color: {this.state.starwarsChar.hair_color}</p>
+              <CharDetails homeworldUrl={this.state.starwarsChar.homeworld} />
             </div>
-          <h1>{this.findCharacter().name}</h1>
+            <h1>{this.state.starwarsChar.name}</h1>
+          </div>
         </div>
-      </div>
-    )
-  }
-
-  findCharacter = () => {
-    return this.state.starwarsChars.filter(character => {
-      if(character.name === this.props.match.params.name) return character;
-    });
+      );
+    }
   }
 }
-
 
 export default CharHighlight;

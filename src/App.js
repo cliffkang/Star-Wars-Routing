@@ -26,7 +26,6 @@ class App extends Component {
       .catch(err => {
         throw new Error(err);
       });
-    console.log("App Component Mount", this.state);
   }
 
   render() {
@@ -45,7 +44,6 @@ class App extends Component {
       <AppStyled>
         <div className="Header" />
         <div className="character">
-          {console.log("Main runs state", this.state)}
           {this.state.starwarsChars.map(character => {
             return <Character key={character.id} character={character} />;
           })}

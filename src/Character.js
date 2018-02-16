@@ -17,7 +17,6 @@ function Character(props) {
         </div>
         <h1>{props.character.name}</h1>
       </div>
-      {/* <Route path='/character/:name' component={this} /> */}
     </Link>
   )
 }

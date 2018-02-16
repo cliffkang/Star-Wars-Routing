@@ -8,7 +8,6 @@ class CharHighlight extends React.Component {
   };
 
   componentDidMount() {
-    console.log("componentDidMount ran");
     axios
       .get(`https://swapi.co/api/people/${this.props.match.params.id}`)
       .then(data => {
@@ -27,7 +26,6 @@ class CharHighlight extends React.Component {
     } else {
       return (
         <div>
-          {console.log("state inside render", this.state)}
           <div className="char">
             <div className="bio">
               <p>Birth Year: {this.state.starwarsChar.birth_year}</p>
